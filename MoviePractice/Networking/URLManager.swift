@@ -16,5 +16,5 @@ struct URLManager {
     static let fetchTopRatedMovies = "https://api.themoviedb.org/3/movie/top_rated"
     static let fetchUpcomingMovies = "https://api.themoviedb.org/3/movie/upcoming"
     static let baseImageURL = "https://image.tmdb.org/t/p/h100/"
-    static let postRatingURL = "https://api.themoviedb.org/3/movie/"
+    static let postAndDeleteRatingURL = "https://api.themoviedb.org/3/movie/"
 }

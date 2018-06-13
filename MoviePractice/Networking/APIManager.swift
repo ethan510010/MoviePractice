@@ -133,7 +133,7 @@ class APIManager{
         urlComponents?.queryItems = []
         if queryParameter != nil{
             for (key,value) in queryParameter!{
-                urlComponents?.queryItems?.append(URLQueryItem(name: key, value: value as! String))
+                urlComponents?.queryItems?.append(URLQueryItem(name: key, value: "\(value)"))
             }
         }
         postURL = (urlComponents?.url)!
@@ -155,6 +155,7 @@ class APIManager{
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil{
                 print(error!.localizedDescription)
+                completion(nil)
                 return
             }
             if let response = response as? HTTPURLResponse, let data = data{
@@ -162,6 +163,48 @@ class APIManager{
                     do{
                         let responseJSON = try JSONSerialization.jsonObject(with: data, options: [])
                         completion(responseJSON as? (NSDictionary))
+                    }catch{
+                        print(error.localizedDescription)
+                        completion(nil)
+                        return
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    //DELETE請求
+    func deleteRate(deleteURL:String,queryParameters:[String:Any]?,headerParameters:[String:String]?,completion: @escaping (NSDictionary?)->Void){
+        guard var deleteURL = URL(string: deleteURL) else {return}
+        var deleteRequest = URLRequest(url: deleteURL)
+        var urlComponents = URLComponents(url: deleteURL, resolvingAgainstBaseURL: false)
+        urlComponents?.queryItems = []
+        if queryParameters != nil{
+            for (key,value) in queryParameters!{
+                urlComponents?.queryItems?.append(URLQueryItem(name: key, value: "\(value)"))
+            }
+        }
+        deleteURL = (urlComponents?.url)!
+        print("發送DELETE請求的URL",deleteURL)
+        deleteRequest = URLRequest(url: deleteURL)
+        if headerParameters != nil{
+            for (key,value) in headerParameters!{
+                deleteRequest.addValue(value, forHTTPHeaderField: key)
+            }
+        }
+        deleteRequest.httpMethod = "DELETE"
+        let task = URLSession.shared.dataTask(with: deleteRequest) { (data, response, error) in
+            if error != nil{
+                print(error!.localizedDescription)
+                completion(nil)
+                return
+            }
+            if let response = response as? HTTPURLResponse, let data = data{
+                if response.statusCode == 200{
+                    do{
+                        let responseJSON = try JSONSerialization.jsonObject(with: data, options: [])
+                        completion(responseJSON as? NSDictionary)
                     }catch{
                         print(error.localizedDescription)
                         completion(nil)

@@ -30,7 +30,7 @@ class MovieViewController: UIViewController {
         }
     }
     
-    //因為後端本身的movieModel沒有自己的評分分數 所以自己在本地端寫一個
+    //因為後端本身的movieModel沒有自己的評分分數 所以自己在本地端寫一個，把情況分成四種
     var giveMovieRatingArrayForNowPlaying:[GiveMovieRatingModel] = []
     var giveMovieRatingArrayForPopular:[GiveMovieRatingModel] = []
     var giveMovieRatingArrayForTopRated:[GiveMovieRatingModel] = []
@@ -79,7 +79,6 @@ class MovieViewController: UIViewController {
         APIManager.shared.fetchMovie(url: defaultBaseMovieURL, queryParameters: ["api_key":URLManager.apiKey,"language":"zh-TW","page":currentPage], headerParameters: nil) { (movies) in
             self.movieArray = movies
         }
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -200,8 +199,9 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource{
 //        }
 //    }
 }
+
+//這個是處理Cell上按鈕的點擊事件
 extension MovieViewController: POSTRateProtocol{
-    
     func postRateForMovie(index: IndexPath) {
         guard let movies = self.movieArray else {return}
         switch defaultBaseMovieURL {
@@ -230,6 +230,7 @@ extension MovieViewController: POSTRateProtocol{
     }
 }
 
+//這個是接收SliderVC傳回來的分數
 extension MovieViewController: PassScoreToMovieVCProtocol{
     func passScoreToMovieVC(score: Float, movieRow: Int) {
         switch defaultBaseMovieURL {

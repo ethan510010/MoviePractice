@@ -35,8 +35,8 @@ class SliderViewController: UIViewController {
         guard let movieRowFromMovieVC = acceptMovieRowFromTableView else { return }
         delegate?.passScoreToMovieVC(score: rateSlider.value, movieRow: movieRowFromMovieVC)
         guard let movieIDFromMovieVC = acceptMovieIDFromTableViewButton else { return }
-        //發出POST請求
-        APIManager.shared.postRate(postURL: URLManager.postRatingURL + "\(movieIDFromMovieVC)" + "/rating", queryParameter: ["api_key":URLManager.apiKey, "guest_session_id":UserDefaults.standard.string(forKey: UserDefaultKey.guessSessionID)!], bodyParameters: ["value":rateSlider.value], headerParameter: nil) { (responseJSON) in
+        //按下確定後發出POST請求
+        APIManager.shared.postRate(postURL: URLManager.postAndDeleteRatingURL + "\(movieIDFromMovieVC)" + "/rating", queryParameter: ["api_key":URLManager.apiKey, "guest_session_id":UserDefaults.standard.string(forKey: UserDefaultKey.guessSessionID)!], bodyParameters: ["value":rateSlider.value], headerParameter: nil) { (responseJSON) in
             if responseJSON != nil{
                 print("有POST成功")
                 print(responseJSON!)
