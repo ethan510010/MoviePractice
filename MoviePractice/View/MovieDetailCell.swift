@@ -52,12 +52,13 @@ class MovieDetailCell: UITableViewCell {
         popularityLabel.text = "\(model.popularity!)"
         releaseDateLabel.text = model.releaseDate
         if giveRatingModel.didRating == true{
-            rateButton.backgroundColor = .blue
+            rateButton.backgroundColor = .red
+            rateButton.setTitleColor(.white, for: .normal)
             rateButton.tintColor = .white
             myRateLabel.text = "您給\(giveRatingModel.score)分"
         }else{
             rateButton.backgroundColor = .white
-            rateButton.tintColor = .blue
+            rateButton.setTitleColor(.black, for: .normal)
             myRateLabel.text = "尚未評分"
         }
         //把movieID存到刪除要用的movieID

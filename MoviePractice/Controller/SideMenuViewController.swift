@@ -34,6 +34,7 @@ class SideMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sideTableView.backgroundColor = .gray
         sideTableView.delegate = self
         sideTableView.dataSource = self
         guard let userAvatarURL = self.userAvatarURL else {return}
@@ -73,5 +74,11 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //點按Cell要做的事
         delegate?.updateContainerVCContent(index: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = .gray
+        return footerView
     }
 }

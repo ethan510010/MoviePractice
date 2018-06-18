@@ -13,9 +13,9 @@ import FacebookLogin
 
 class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
-    var googleSigninButton:GIDSignInButton!
-    var userAvatarURL:URL!
     
+    var userAvatarURL:URL!
+    @IBOutlet weak var googleSigninButton: GIDSignInButton!
     
     var jsonResponseDic:NSDictionary?{
         didSet{
@@ -109,15 +109,15 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         //建立google登入按鈕
         GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
-        googleSigninButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        view.addSubview(googleSigninButton)
-        googleSigninButton.style = .wide
+//        googleSigninButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+//        view.addSubview(googleSigninButton)
+//        googleSigninButton.style = .wide
         // Do any additional setup after loading the view.
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        googleSigninButton.center = view.center
+//        googleSigninButton.center = view.center
     }
 
     override func didReceiveMemoryWarning() {

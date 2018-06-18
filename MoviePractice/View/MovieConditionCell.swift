@@ -20,7 +20,7 @@ class MovieConditionCell: UICollectionViewCell {
             self.layer.cornerRadius = 8
             self.layer.borderWidth = 3
             self.layer.masksToBounds = true
-            self.layer.borderColor = UIColor.blue.cgColor
+            self.layer.borderColor = UIColor.white.cgColor
             //            didSelectBarView.backgroundColor = .blue
             model.isSelected = false
         }else{

@@ -140,7 +140,7 @@ extension MovieViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/CGFloat(movieConditionArray.count), height: self.view.frame.height * (60/667))
+        return CGSize(width: collectionView.frame.width/CGFloat(movieConditionArray.count), height: collectionView.frame.height * (5/7))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
