@@ -12,6 +12,8 @@ import GoogleSignIn
 class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
     var googleSigninButton:GIDSignInButton!
+    var userAvatarURL:URL!
+    
     
     var jsonResponseDic:NSDictionary?{
         didSet{
@@ -29,6 +31,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         print(user.userID)
         print(user.profile.email)
         print(user.profile.imageURL(withDimension: 300))
+        userAvatarURL = user.profile.imageURL(withDimension: 300)
         performSegue(withIdentifier: SegueIDManager.performMovieVC, sender: nil)
     }
     
@@ -48,6 +51,13 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             
         }
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIDManager.performMovieVC{
+            guard let containerVC = segue.destination as? ContainerViewController else { return }
+            containerVC.userAvatarURL = userAvatarURL
+        }
     }
     
     override func viewDidLoad() {

@@ -11,4 +11,5 @@ import Foundation
 struct CellIDManager {
     static let movieConditionCell = "MovieConditionCell"
     static let movieDetailCell = "MovieDetailCell"
+    static let sideMenuCell = "SideMenuCell"
 }

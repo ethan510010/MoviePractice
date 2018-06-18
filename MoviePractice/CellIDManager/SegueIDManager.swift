@@ -10,4 +10,5 @@ import Foundation
 struct SegueIDManager {
     static let performMovieVC = "performMovieVC"
     static let performRateSlider = "performRateSlider"
+    static let sideMenuSegue = "SideMenuSegue"
 }

@@ -12,11 +12,16 @@ class ContainerViewController: UIViewController {
 
     @IBOutlet weak var sideMenuConstraint: NSLayoutConstraint!
     var sideMenuOpen:Bool = false
+    var userAvatarURL:URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if userAvatarURL != nil{
+            print(userAvatarURL!)
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: .toggleSideMunu, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(signOut), name: Notification.Name("goBack"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(signOut), name: .goBack, object: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -46,15 +51,14 @@ class ContainerViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == SegueIDManager.sideMenuSegue{
+            guard let sideMenuVC = segue.destination as? SideMenuViewController else {return}
+            guard let userAvatarURL = self.userAvatarURL else {return}
+            sideMenuVC.userAvatarURL = userAvatarURL
+        }
     }
-    */
 
 }
