@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import GoogleSignIn
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate {
     
+    var googleSigninButton:GIDSignInButton!
     
     var jsonResponseDic:NSDictionary?{
         didSet{
@@ -17,6 +19,17 @@ class SignInViewController: UIViewController {
                 self.performSegue(withIdentifier: SegueIDManager.performMovieVC, sender: nil)
             }
         }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error != nil{
+            print(error!.localizedDescription)
+            return
+        }
+        print(user.userID)
+        print(user.profile.email)
+        print(user.profile.imageURL(withDimension: 300))
+        performSegue(withIdentifier: SegueIDManager.performMovieVC, sender: nil)
     }
     
     @IBAction func guestSignIn(_ sender: UIButton) {
@@ -39,8 +52,19 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //建立google登入按鈕
+        GIDSignIn.sharedInstance()?.uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        googleSigninButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
+        view.addSubview(googleSigninButton)
+        googleSigninButton.style = .wide
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        googleSigninButton.center = view.center
     }
 
     override func didReceiveMemoryWarning() {

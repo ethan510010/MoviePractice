@@ -18,6 +18,14 @@ enum Condition:Int{
 class MovieViewController: UIViewController {
     
     
+    //開啟側邊選單
+    @IBAction func toggleSideMenu(_ sender: UIBarButtonItem) {
+        print("Toggle side menu")
+        NotificationCenter.default.post(name: .toggleSideMunu, object: nil, userInfo: nil)
+        
+    }
+    
+    
     var currentPage:Int = 1
     //選擇的movieRow要把它傳過去slider VC
 //    var chooseMovieRow:Int?
