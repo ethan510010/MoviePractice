@@ -28,9 +28,16 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sK-pt-KPE">
-                                <rect key="frame" x="163" y="445" width="49" height="30"/>
+                                <rect key="frame" x="125" y="445" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="FB登入"/>
+                                <color key="backgroundColor" red="0.27353608610000002" green="0.5374699235" blue="0.96083360910000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Facebook登入">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="facebookSignin:" destination="DOf-uK-nEA" eventType="touchUpInside" id="QCY-VI-9Ms"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onb-Xg-B9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="446" y="496"/>
+            <point key="canvasLocation" x="445.60000000000002" y="495.20239880059972"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="J1b-Ic-NYi">
@@ -81,6 +88,7 @@
                         <viewLayoutGuide key="safeArea" id="ojT-s6-1lk"/>
                     </view>
                     <connections>
+                        <outlet property="mainContainerView" destination="8iL-Ea-nf4" id="E5e-TF-ldA"/>
                         <outlet property="sideMenuConstraint" destination="Gsb-hW-ZJR" id="YgG-Wa-lhb"/>
                     </connections>
                 </viewController>
@@ -91,7 +99,7 @@
         <!--Movie View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MovieViewController" customModule="MoviePractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="movieListVC" id="BYZ-38-t0r" customClass="MovieViewController" customModule="MoviePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -323,7 +331,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-yh-0EQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-yh-0EQ" customClass="CircleImage" customModule="MoviePractice" customModuleProvider="target">
                                 <rect key="frame" x="50" y="20" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -343,7 +351,7 @@
         <!--User Info View Controller-->
         <scene sceneID="Qul-eo-Bnz">
             <objects>
-                <viewController id="s3P-lj-XOt" customClass="UserInfoViewController" customModule="MoviePractice" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userDetailVC" id="s3P-lj-XOt" customClass="UserInfoViewController" customModule="MoviePractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebE-Ld-hau">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

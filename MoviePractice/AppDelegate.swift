@@ -8,14 +8,10 @@
 
 import UIKit
 import GoogleSignIn
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
-    
-    
-    
-    
-
     
     var window: UIWindow?
     
@@ -23,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         var error:Error?
+        
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         GIDSignIn.sharedInstance()?.clientID = "411302824183-ml744et7n13n63v60cb10cjm7o50p5nh.apps.googleusercontent.com"
         
         return true
@@ -30,7 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        let googleHandler = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        let facebookHandler = SDKApplicationDelegate.shared.application (
+            app,
+            open: url,
+            sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+        return googleHandler || facebookHandler
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

@@ -8,9 +8,10 @@
 
 import UIKit
 
-enum CellName:Int {
-    case 個人資訊 = 0
-    case 登出
+
+//這個Protocol的代理對象為ContainerVC
+protocol UpdateContainerVCContentProtocol {
+    func updateContainerVCContent(index:IndexPath)
 }
 
 class SideMenuViewController: UIViewController {
@@ -18,7 +19,12 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var sideTableView: UITableView!
     
+    //接收前面傳過來的使用者大頭貼URL
     var userAvatarURL:URL?
+    
+    
+    //設定Delegate
+    var delegate:UpdateContainerVCContentProtocol?
     
     let tableViewInfoArray = ["個人詳細資訊","登出"]
 //    @IBAction func signOut(_ sender: UIButton) {
@@ -66,13 +72,6 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //點按Cell要做的事
-        switch indexPath.row {
-        case CellName.個人資訊.rawValue:
-            print("個人資訊")
-        case CellName.登出.rawValue:
-            NotificationCenter.default.post(name: .goBack, object: nil)
-        default:
-            break
-        }
+        delegate?.updateContainerVCContent(index: indexPath)
     }
 }

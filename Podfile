@@ -6,6 +6,7 @@ target 'MoviePractice' do
   use_frameworks!
 
   pod 'GoogleSignIn'
+  pod 'FacebookLogin'
   # Pods for MoviePractice
 
 end
