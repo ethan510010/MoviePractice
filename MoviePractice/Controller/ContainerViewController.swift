@@ -96,11 +96,12 @@ extension ContainerViewController: UpdateContainerVCContentProtocol{
     func updateContainerVCContent(index: IndexPath) {
         switch index.row {
         case SideMenuCellName.個人資訊.rawValue:
+            
             let userInfoNav = UINavigationController()
             let userInfoVC: UserInfoViewController =
             {UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StoryboardIDManager.userDetailVC) as! UserInfoViewController}()
             userInfoNav.addChildViewController(userInfoVC)
-            changeContainerVCContent(to: userInfoNav)
+            self.changeContainerVCContent(to: userInfoNav)
         case SideMenuCellName.登出.rawValue:
             //一般來說登出會跟後端溝通好紀錄現在是哪種登入 而配合哪種登出 但現在因為沒有後端 所以先一次性兩個都登出
             GIDSignIn.sharedInstance().signOut()
