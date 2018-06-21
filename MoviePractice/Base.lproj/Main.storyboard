@@ -78,7 +78,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iL-Ea-nf4">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="Kky-Zm-YB4" kind="embed" id="cvd-TY-qBx"/>
+                                    <segue destination="Kky-Zm-YB4" kind="embed" identifier="perfomMovieNav" id="cvd-TY-qBx"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-Ty-0y5">
@@ -362,7 +362,11 @@
                         <viewLayoutGuide key="safeArea" id="GmD-uj-gua"/>
                     </view>
                     <navigationItem key="navigationItem" id="YrB-GG-9rK">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="crP-Mz-pE2"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu" id="crP-Mz-pE2">
+                            <connections>
+                                <action selector="toggleMenu:" destination="s3P-lj-XOt" id="NFE-Za-q0C"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tgv-fs-ukq" userLabel="First Responder" sceneMemberID="firstResponder"/>

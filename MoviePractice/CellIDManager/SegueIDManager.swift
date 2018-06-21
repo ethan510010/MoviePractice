@@ -11,4 +11,5 @@ struct SegueIDManager {
     static let performMovieVC = "performMovieVC"
     static let performRateSlider = "performRateSlider"
     static let sideMenuSegue = "SideMenuSegue"
+    static let perfomMovieNav = "perfomMovieNav"
 }

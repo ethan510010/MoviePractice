@@ -9,6 +9,11 @@
 import UIKit
 
 class UserInfoViewController: UIViewController {
+    
+    @IBAction func toggleMenu(_ sender: UIBarButtonItem) {
+        NotificationCenter.default.post(name: .toggleSideMunu, object: nil, userInfo: nil)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

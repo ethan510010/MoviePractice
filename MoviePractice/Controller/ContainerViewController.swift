@@ -50,16 +50,14 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         if userAvatarURL != nil{
             print(userAvatarURL!)
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: .toggleSideMunu, object: nil)
         
+        //MovieListVC怎麼找到的是利用PerformSegue的方式去找到movieListVC裡面的東西 其實一開始ContainerView會顯示就是因為已經快速進行過Perform Segue了 來認得movieListVC是對應哪一個ViewController
         selectedViewController = movieListVC
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,6 +84,10 @@ class ContainerViewController: UIViewController {
             sideMenuVC.delegate = self
             guard let userAvatarURL = self.userAvatarURL else {return}
             sideMenuVC.userAvatarURL = userAvatarURL
+            //下面要進行MovieListVC真正的初始化
+        }else if segue.identifier == SegueIDManager.perfomMovieNav{
+            guard let nav = segue.destination as? UINavigationController else {return}
+            self.movieListVC = nav.viewControllers.first as? MovieViewController
         }
     }
 
@@ -96,12 +98,24 @@ extension ContainerViewController: UpdateContainerVCContentProtocol{
     func updateContainerVCContent(index: IndexPath) {
         switch index.row {
         case SideMenuCellName.個人資訊.rawValue:
-            
             let userInfoNav = UINavigationController()
             let userInfoVC: UserInfoViewController =
             {UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: StoryboardIDManager.userDetailVC) as! UserInfoViewController}()
             userInfoNav.addChildViewController(userInfoVC)
             self.changeContainerVCContent(to: userInfoNav)
+            ////加上這行，可以避免切換 controller 時，可以讓 main container view 內的 controller 先排版．這樣在隱藏 menu 時，才不會看到 navigation bar 跟 search bar 有放大的動畫
+            self.view.layoutIfNeeded()
+            if sideMenuOpen{
+                sideMenuOpen = false
+                sideMenuConstraint.constant = -200
+            }else{
+                sideMenuOpen = true
+                sideMenuConstraint.constant = 0
+            }
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+            
         case SideMenuCellName.登出.rawValue:
             //一般來說登出會跟後端溝通好紀錄現在是哪種登入 而配合哪種登出 但現在因為沒有後端 所以先一次性兩個都登出
             GIDSignIn.sharedInstance().signOut()
